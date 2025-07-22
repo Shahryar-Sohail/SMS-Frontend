@@ -71,7 +71,7 @@ export default function Login() {
 
       <div className='flex justify-center '>
         
-        <div className="dark:text-white">
+        <div className="dark:text-white text-gray-500">
           Username: <span className='text-red-500'>admin</span> <br />
           Password: <span className='text-green-500'>admin</span>
         </div>         
