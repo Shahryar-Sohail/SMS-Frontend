@@ -159,6 +159,7 @@ const Attendance = () => {
                         {mode === 'create' ? (
                           <input
                             type="checkbox"
+                            className='border-2 border-red-500 text-green-700'
                             checked={record?.isPresent || false}
                             onChange={() => {
                               setAttendance(prev =>
