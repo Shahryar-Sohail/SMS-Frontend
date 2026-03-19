@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { initFlowbite } from 'flowbite';
+import { Moon, MoonIcon, MoonStar } from 'lucide-react';
 
 export default function Navbar() {
     const toggleDark = () => {
         document.documentElement.classList.toggle('dark');
+    };
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
     };
 
     const location = useLocation();
@@ -16,10 +22,11 @@ export default function Navbar() {
     return (
         <nav className="bg-yellow-400 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
                 <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <span className="self-center text-2xl font-semibold whitespace-nowrap mx-4 dark:text-white text-black">SMS</span>
                 </a>
-
+                {/* Mobile Menu Button */}
                 <button
                     data-collapse-toggle="navbar-user"
                     type="button"
@@ -39,8 +46,10 @@ export default function Navbar() {
                     </svg>
                 </button>
 
-                <div className="hidden w-full md:flex md:w-auto mx-auto" id="navbar-user">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-yellow-400 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                {/* Navbar  */}
+                <div className="hidden w-full md:flex md:justify-center md:w-1/2 lg:w-1/3 mx-auto" id="navbar-user">
+                    <ul className="flex flex-col  font-medium p-4 md:p-0 mt-4 rounded-lg bg-yellow-400 
+                    md:flex md:flex-row md:justify-between md:w-full md:mt-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <Link
                                 to="/home"
@@ -60,23 +69,23 @@ export default function Navbar() {
                             >Attendance</Link>
                         </li>
 
+                        <li className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            <button onClick={handleLogout}>Sign Out</button>
+                        </li>
+
                         <li>
                             <button
                                 onClick={toggleDark}
                                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                             >
-                                Toggle Mode
+                                <MoonStar className="w-6 h-6" />
                             </button>
                         </li>
 
-                        <li>
-                            <Link
-                                to="/"
-                                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >Sign Out</Link>
-                        </li>
                     </ul>
                 </div>
+
+
             </div>
         </nav>
     );
